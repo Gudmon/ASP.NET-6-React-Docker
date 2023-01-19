@@ -2,21 +2,27 @@ version: '3'
 services:
   aspnetbackend:
     build:
-      context: ./aspnetbackend
+      context: ./aspnetbackend    
+    environment:
+      - DB_HOST=customerDb
+      - DB_NAME=customer
+      - DB_SA_PASSWORD=A!VeryComplex123Password
     ports:
       - "5005:5005"
+    depends_on:
+      - db
   reactfrontend:
     build:
       context: ./reactfrontend
     ports:
-      - "3000:3000"
-    depends_on:
-      - db  
+      - "3000:3000" 
   db:
-    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: customerDb
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+      ACCEPT_EULA: Y
+      SA_PASSWORD: A!VeryComplex123Password     
     ports:
       - 1433:1433
-    environment:
-      SA_PASSWORD: S3cur3P@ssW0rd!
-      ACCEPT_EULA: Y    
+   
         
