@@ -1,0 +1,13 @@
+version: '3'
+services:
+  aspnetbackend:
+    build:
+      context: /aspnetbackend
+    ports:
+      - "5005:5005"
+  reactfrontend:
+    build:
+      context: /reactfrontend
+    ports:
+      - "3000:3000"
+      
