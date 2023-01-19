@@ -7,7 +7,7 @@ services:
       - "5005:5005"
   reactfrontend:
     build:
-      context: /reactfrontend
+      context: ./reactfrontend
     ports:
       - "3000:3000"
       
