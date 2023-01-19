@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Connections;
 using Microsoft.AspNetCore.Hosting;
 using System.Reflection.PortableExecutable;
+using Microsoft.EntityFrameworkCore;
+using aspnetbackend.Database;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,7 +17,11 @@ builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
         builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
     }));
 
-
+builder.Services.AddDbContext<AppDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
+}); ;
+builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 var app = builder.Build();
 
