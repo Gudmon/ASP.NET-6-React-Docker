@@ -2,6 +2,7 @@
 using aspnetbackend.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace aspnetbackend.Controllers
 {
@@ -17,16 +18,17 @@ namespace aspnetbackend.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Customer>> GetCustomers()
+        public async Task<ActionResult<List<Customer>>> GetCustomers()
         {
-            return _dbContext.Customers;
+            var customers = await _dbContext.Customers.ToListAsync();
+            return Ok(customers);
         }
 
         [HttpGet("{id:int}")]
         public async Task<ActionResult<Customer>> GetCustomerById(int id)
         {
             var customer = await _dbContext.Customers.FindAsync(id);
-            return customer;
+            return Ok(customer);
         }
 
         [HttpPost]
