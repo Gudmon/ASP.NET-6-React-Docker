@@ -24,5 +24,11 @@ services:
       SA_PASSWORD: A!VeryComplex123Password     
     ports:
       - 1433:1433
+    volumes:
+      - db-data:/var/opt/mssql 
+    restart: always 
+
+volumes:
+  db-data:
    
         
