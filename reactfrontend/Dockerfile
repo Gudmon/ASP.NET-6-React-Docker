@@ -1,10 +1,7 @@
 # ==== CONFIGURE =====
 # Use a Node 16 base image
-FROM mcr.microsoft.com/dotnet/sdk:6.0-focal 
-RUN apt-get update -yq \
-    && apt-get install curl gnupg -yq \
-    && curl -sL https://deb.nodesource.com/setup_16.x | bash \
-    && apt-get install nodejs -yq
+FROM node:16-alpine
+
 # Set the working directory to /app inside the container
 WORKDIR /app
 # Copy app files
